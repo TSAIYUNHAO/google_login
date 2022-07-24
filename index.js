@@ -50,7 +50,14 @@ app.get("/",(req,res)=>{
     res.render("index",{user:req.user});
 });
 
-app.listen(8080,()=>{
+let port = process.env.PORT;
+if (port == null || port == "") {
+  port = 8080;
+}
+
+
+
+app.listen(port,()=>{
     console.log("Server running on port 8080");
 })
 
