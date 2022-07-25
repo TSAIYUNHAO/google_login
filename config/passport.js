@@ -3,7 +3,7 @@ const passport =require("passport");
 const GoogleStrategy =require("passport-google-oauth20");
 const User = require("../models/user-model");
 const Localstrategy= require("passport-local");
-const bcrypt=require("bcrypt");
+const bcrypt=require("bcryptjs");
  
 
 
