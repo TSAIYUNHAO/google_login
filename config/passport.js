@@ -44,16 +44,17 @@ passport.use(new Localstrategy((username,password,done)=>{
 passport.use(new GoogleStrategy({
        clientID:process.env.GOOGLE_CLIENT_ID,
        clientSecret:process.env.GOOGLE_CLIENT_SECRET,
-       callbackURL:"https://arcane-sea-38331.herokuapp.com/auth/google/redirect"
+       callbackURL:"https://arcane-sea-38331.herokuapp.com/auth/google/redirect",
 },
 (accessToken,refreshToken,profile,done)=>{
    console.log(profile);
-   User.findOne({googleID:profile.id}).then((foundUser) =>{
+   User.findOne({email:profile.emails[0].value}).then((foundUser) =>{
           if (foundUser){
+              
               console.log("User already exist");
-                done(null,foundUser);
+              done(null,foundUser);
           }else{
-                const user= new User({
+                new User({
                    name: profile.displayName,
                    googleID:profile.id,
                    thumbnail:profile.photos[0].value,
@@ -61,7 +62,7 @@ passport.use(new GoogleStrategy({
                  }).save().then((newUser)=>{
                         console.log("New user created.");
                         done(null,newUser);
-                 })
+                 });
           }
        
    });
