@@ -1,9 +1,8 @@
 const router = require("express").Router();
-const { trusted } = require("mongoose");
 const passport = require("passport");
-const bcrypt= require("bcrypt");
+const bcrypt= require("bcryptjs");
 const User =require("../models/user-model");
-const UserInfoError = require("passport-google-oauth20/lib/errors/userinfoerror");
+
 router.get("/login",(req,res)=> {
     res.render("login",{user:req.user});
 });
