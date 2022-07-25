@@ -44,7 +44,7 @@ passport.use(new Localstrategy((username,password,done)=>{
 passport.use(new GoogleStrategy({
        clientID:process.env.GOOGLE_CLIENT_ID,
        clientSecret:process.env.GOOGLE_CLIENT_SECRET,
-       callbackURL:"https://arcane-sea-38331.herokuapp.com/auth/google/redirect"
+       callbackURL:"/auth/google/redirect"
 },
 (accessToken,refreshToken,profile,done)=>{
    console.log(profile);
@@ -57,10 +57,10 @@ passport.use(new GoogleStrategy({
                    name: profile.displayName,
                    googleID:profile.id,
                    thumbnail:profile.photos[0].value,
-                   email:profile.email[0].value,
+                   email:profile.emails[0].value,
                  }).save().then((newUser)=>{
                         console.log("New user created.");
-                        done(null,newuser);
+                        done(null,newUser);
                  })
           }
        
