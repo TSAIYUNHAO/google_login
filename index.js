@@ -52,12 +52,12 @@ app.get("/",(req,res)=>{
 
 let port = process.env.PORT;
 if (port == null || port == "") {
-  port = 3000;
+  port = 8080;
 }
 
 
 
-app.listen(port || 3000,()=>{
+app.listen(port || 8080,()=>{
     console.log("Server running on port");
 })
 
